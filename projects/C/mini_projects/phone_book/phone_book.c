@@ -122,3 +122,25 @@ void take_input(person *p)
     printf("Enter mail : ");
     scanf("%s",p->mail);
 }
+
+void list_record()
+{
+    system("cls");
+    FILE *fp;
+    fp = fopen("phonebook_db","rb");
+    if(fp==NULL)
+    {
+        printf("Error In File Opening,Please Try Again! \n");
+        printf("Press any key to continue....\n");
+        return;
+    }
+    else
+    {
+        person p;
+        printf("\t\t*********************************************************************\n");
+        printf("\t\t*                   Here Is All Recorded Contacts                   *\n");
+        printf("\t\t*********************************************************************\n");
+        printf("\t\t NAME \t\t\t COUNTRY CODE \t\t PHONE NO \t\t\t SEX \t\t\t MAIL\n");
+        PRINTF("-------------------------------------------------------------------------")
+    }
+}
