@@ -141,6 +141,103 @@ void list_record()
         printf("\t\t*                   Here Is All Recorded Contacts                   *\n");
         printf("\t\t*********************************************************************\n");
         printf("\t\t NAME \t\t\t COUNTRY CODE \t\t PHONE NO \t\t\t SEX \t\t\t MAIL\n");
-        PRINTF("-------------------------------------------------------------------------")
+        PRINTF("-------------------------------------------------------------------------\n");
+        while(fread(&p, sizeof(p), 1, fp)==1)
+        {
+            int i;
+            int len1 = 40 - strlen(p.name);
+            int len2 = 19 - strlen(p.country_code);
+            int len3 = 15;
+            int len4 = 21 - strlen(p.sex);
+           
+            printf("%s",p.name);
+            for(i=0;i<len1;i++)
+                printf(" ");
+
+            printf("%s",p.country_code);
+            for(i=0;i<len2;i++)
+                printf(" ");
+
+            printf("%d",p.phone_no);
+            for(i=0;i<len3;i++)
+                printf(" ");
+            
+            printf("%s",p.sex);
+            for(i=0;i<len4;i++)
+                printf(" ");
+            
+            printf("%s",p.mail);
+            printf("\n");
+            fflush(stdin);
+        }
+        fflush(stdin);
+        fclose(fp);
+        printf("\n\n Pressany key to continue....\n");
+    }
+}
+
+void search_person()
+{
+    system("cls");
+    int phone;
+    printf("Enter the phone number of the person you want to find: ");
+    scanf("%d",&phone);
+
+    FILE *fp;
+    fp = open("phonebook_db","rb");
+    if (fp==NULL)
+    {
+        printf("Error In File Opening,Please Try Again! \n");
+        printf("Press any key to continue....\n");
+        return;
+    }
+    else
+    {
+        int flag=0;
+        person p;
+        while(fread(&p,sizeof(p), 1, fp) == 1)
+        {
+            if(p.phone_no == phone)
+            {
+                printf("\t NAME \t\t\t\t COUNTRY CODE \t\t\t\t PHONE NO \t\t\t\t SEX \t\t\t\t MAIL \n");
+                printf("---------------------------------------------------------------------------\n");
+                int i;
+                int len1 = 40 - strlen(p.name);
+                int len2 = 19 - strlen(p.country_code);
+                int len3 = 15;
+                int len4 = 21 - strlen(p.sex);
+            
+                printf("%s",p.name);
+                for(i=0;i<len1;i++)
+                    printf(" ");
+
+                printf("%s",p.country_code);
+                for(i=0;i<len2;i++)
+                    printf(" ");
+
+                printf("%d",p.phone_no);
+                for(i=0;i<len3;i++)
+                    printf(" ");
+                
+                printf("%s",p.sex);
+                for(i=0;i<len4;i++)
+                    printf(" ");
+                
+                printf("%s",p.mail);
+                printf("\n");
+                
+                flag=1;
+                break;
+            }
+            else continue;
+        }
+        if(flag==0)
+        {
+            system("cls");
+            printf("Person Is Not In The Phone Book\n");
+        }
+        fflush(stdin);
+        fclose(fp);
+        printf("\n\n Pressany key to continue....\n");
     }
 }
